@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 namespace AdventOfCode2020
@@ -33,6 +34,11 @@ namespace AdventOfCode2020
 
         private T ParseLine(string line)
         {
+            if (typeof(T) == typeof(string))
+            {
+                // Ewww
+                return (T) Convert.ChangeType(line, typeof(T));
+            }
             var parse = typeof(T).GetMethod("Parse", new Type[] { typeof(string) });
             return (T) parse.Invoke(this, new[] { line });
         }
