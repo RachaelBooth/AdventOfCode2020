@@ -10,7 +10,7 @@ namespace AdventOfCode2020.Day5
 
         public Solver()
         {
-            passes = new InputReader<string>(5).ReadInput();
+            passes = new InputReader<string>(5).ReadInputAsLines();
         }
 
         public void SolvePartOne()

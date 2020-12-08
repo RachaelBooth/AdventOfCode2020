@@ -10,7 +10,7 @@ namespace AdventOfCode2020.Day1
 
         public Solver()
         {
-            expenseReport = new InputReader<int>(1).ReadInput().ToList();
+            expenseReport = new InputReader<int>(1).ReadInputAsLines().ToList();
         }
 
         public void SolvePartOne()

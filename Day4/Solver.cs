@@ -7,27 +7,11 @@ namespace AdventOfCode2020.Day4
 {
     public class Solver : ISolver
     {
-        private List<Passport> passports = new List<Passport>();
+        private readonly IEnumerable<Passport> passports;
 
         public Solver()
         {
-            var input = new InputReader<string>(4).ReadInput();
-
-            var current = new List<string>();
-            foreach (var line in input)
-            {
-                if (line == "")
-                {
-                    passports.Add(new Passport(current));
-                    current = new List<string>();
-                }
-                else
-                {
-                    current.Add(line);
-                }
-            }
-            // Include the last one...
-            passports.Add(new Passport(current));
+            passports = new InputReader<Passport>(4).ReadInputAsLineGroups();
         }
 
         public void SolvePartOne()

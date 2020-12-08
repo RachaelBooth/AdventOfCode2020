@@ -8,16 +8,32 @@ namespace AdventOfCode2020.Day4
 {
     public class Passport
     {
-        public Dictionary<string, string> Data;
+        private Dictionary<string, string> data;
 
         public Passport(IEnumerable<string> data)
         {
-            Data = new Dictionary<string, string>();
+            this.data = new Dictionary<string, string>();
             foreach (var item in data.SelectMany(d => d.Split(' ')))
             {
                 var parts = item.Split((':'));
-                Data.Add(parts[0], parts[1]);
+                this.data.Add(parts[0], parts[1]);
             }
+        }
+
+        public Passport(Dictionary<string, string> data)
+        {
+            this.data = data;
+        }
+
+        public static Passport Parse(List<string> dataLines)
+        {
+            var data = new Dictionary<string, string>();
+            foreach (var item in dataLines.SelectMany(d => d.Split(' ')))
+            {
+                var parts = item.Split((':'));
+                data.Add(parts[0], parts[1]);
+            }
+            return new Passport(data);
         }
 
         public bool IsValid()
@@ -27,25 +43,25 @@ namespace AdventOfCode2020.Day4
                 return false;
             }
 
-            var birthYear = int.Parse(Data["byr"]);
+            var birthYear = int.Parse(data["byr"]);
             if (birthYear < 1920 || birthYear > 2002)
             {
                 return false;
             }
 
-            var issueYear = int.Parse(Data["iyr"]);
+            var issueYear = int.Parse(data["iyr"]);
             if (issueYear < 2010 || issueYear > 2020)
             {
                 return false;
             }
 
-            var expirationYear = int.Parse(Data["eyr"]);
+            var expirationYear = int.Parse(data["eyr"]);
             if (expirationYear < 2020 || expirationYear > 2030)
             {
                 return false;
             }
 
-            var height = Data["hgt"];
+            var height = data["hgt"];
             if (height.EndsWith("cm"))
             {
                 var cmHeight = int.Parse(height.TrimEnd('c', 'm'));
@@ -67,19 +83,19 @@ namespace AdventOfCode2020.Day4
                 return false;
             }
 
-            var hair = Data["hcl"];
+            var hair = data["hcl"];
             if (!Regex.IsMatch(hair, "^#[0-9a-f]{6}$"))
             {
                 return false;
             }
 
             var allowedEyes = new[] {"amb", "blu", "brn", "gry", "grn", "hzl", "oth"};
-            if (!allowedEyes.Contains(Data["ecl"]))
+            if (!allowedEyes.Contains(data["ecl"]))
             {
                 return false;
             }
 
-            if (!Regex.IsMatch(Data["pid"], "^[0-9]{9}$"))
+            if (!Regex.IsMatch(data["pid"], "^[0-9]{9}$"))
             {
                 return false;
             }
@@ -94,7 +110,7 @@ namespace AdventOfCode2020.Day4
 
         private bool DataContainsKeys(params string[] keys)
         {
-            return keys.All(key => Data.ContainsKey(key));
+            return keys.All(key => data.ContainsKey(key));
         }
     }
 }

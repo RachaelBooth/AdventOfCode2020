@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 
 namespace AdventOfCode2020
@@ -9,25 +8,44 @@ namespace AdventOfCode2020
     {
         private readonly string inputFilePath;
 
-        public InputReader(int day)
+        public InputReader(int day, bool useTestFilePath = false)
         {
-            inputFilePath = $"../../../day{day}/input.txt";
+            inputFilePath = $"../../../day{day}/{(useTestFilePath ? "Test" : "")}Input.txt";
         }
 
-        public IEnumerable<T> ReadInput()
+        public IEnumerable<T> ReadInputAsLines()
         {
-            return ReadInputFromFile(inputFilePath);
-        }
-
-        private IEnumerable<T> ReadInputFromFile(string filePath)
-        {
-            var reader = new StreamReader(filePath);
+            var reader = new StreamReader(inputFilePath);
             string line;
 
             while ((line = reader.ReadLine()) != null)
             {
                 yield return ParseLine(line);
             }
+
+            reader.Close();
+        }
+
+        public IEnumerable<T> ReadInputAsLineGroups()
+        {
+            var reader = new StreamReader(inputFilePath);
+            string line;
+
+            var currentLines = new List<string>();
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (line == "")
+                {
+                    yield return ParseLineGroup(currentLines);
+                    currentLines = new List<string>();
+                }
+                else
+                {
+                    currentLines.Add(line);
+                }
+            }
+            // Because bleugh. (Will get null for end of file rather than final blank line)
+            yield return ParseLineGroup(currentLines);
 
             reader.Close();
         }
@@ -41,6 +59,12 @@ namespace AdventOfCode2020
             }
             var parse = typeof(T).GetMethod("Parse", new Type[] { typeof(string) });
             return (T) parse.Invoke(this, new[] { line });
+        }
+
+        private T ParseLineGroup(List<string> lines)
+        {
+            var parse = typeof(T).GetMethod("Parse", new Type[] { typeof(List<string>) });
+            return (T) parse.Invoke(this, new[] { lines });
         }
     }
 }

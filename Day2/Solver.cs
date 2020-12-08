@@ -10,7 +10,7 @@ namespace AdventOfCode2020.Day2
 
         public Solver()
         {
-            data = new InputReader<PasswordData>(2).ReadInput();
+            data = new InputReader<PasswordData>(2).ReadInputAsLines();
         }
 
         public void SolvePartOne()

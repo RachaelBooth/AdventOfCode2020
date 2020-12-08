@@ -10,7 +10,7 @@ namespace AdventOfCode2020.Day3
 
         public Solver()
         {
-            var mapLines = new InputReader<MapLine>(3).ReadInput();
+            var mapLines = new InputReader<MapLine>(3).ReadInputAsLines();
             map = new Map(mapLines);
         }
 
