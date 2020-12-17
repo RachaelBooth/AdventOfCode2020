@@ -4,6 +4,30 @@ using System.IO;
 
 namespace AdventOfCode2020
 {
+    public class InputReader : InputReader<string>
+    {
+        public InputReader(int day, bool useTestFilePath = false) : base(day, useTestFilePath) {}
+
+        public Dictionary<T, U> ParseGrid<T, U>(Func<(int x, int y), T> locationMap, Func<char, U> characterMap)
+        {
+            var grid = new Dictionary<T, U>();
+            var y = 0;
+            foreach (var line in ReadInputAsLines())
+            {
+                var x = 0;
+                while (x < line.Length)
+                {
+                    grid.Add(locationMap((x, y)), characterMap(line[x]));
+                    x++;
+                }
+
+                y++;
+            }
+
+            return grid;
+        }
+    }
+
     public class InputReader<T>
     {
         private readonly string inputFilePath;

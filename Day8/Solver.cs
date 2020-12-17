@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using AdventOfCode2020.Computer;
 
 namespace AdventOfCode2020.Day8
 {
@@ -11,7 +11,6 @@ namespace AdventOfCode2020.Day8
 
         public Solver()
         {
-           // rules = new InputReader<Rule>(7).ReadInputAsLines().ToList();
            instructions = new InputReader<Instruction>(8).ReadInputAsLines().ToList();
         }
 
@@ -103,32 +102,5 @@ namespace AdventOfCode2020.Day8
                 // In infinite loop =( - try again
             }
         }
-    }
-
-    public class Instruction
-    {
-        public Operation operation;
-        public int argument;
-
-        public Instruction(Operation operation, int argument)
-        {
-            this.operation = operation;
-            this.argument = argument;
-        }
-
-        public static Instruction Parse(string line)
-        {
-            var parts = line.Split(" ");
-            var operation = Enum.Parse<Operation>(parts[0]);
-            var argument = int.Parse(parts[1]);
-            return new Instruction(operation, argument);
-        }
-    }
-
-    public enum Operation
-    {
-        acc,
-        jmp,
-        nop
     }
 }
