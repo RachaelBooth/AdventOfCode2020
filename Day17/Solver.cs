@@ -9,7 +9,7 @@ namespace AdventOfCode2020.Day17
     {
         public void SolvePartOne()
         {
-            var currentCubes = new InputReader(17).ParseGrid(l => l.ToThreeDimensions(), c => c == '#');
+            var currentCubes = new InputReader(17).Parse3DimensionalGrid(c => c == '#');
             var i = 0;
             while (i < 6)
             {
@@ -23,7 +23,7 @@ namespace AdventOfCode2020.Day17
 
         public void SolvePartTwo()
         {
-            var currentCubes = new InputReader(17).ParseGrid(l => l.ToFourDimensions(), c => c == '#');
+            var currentCubes = new InputReader(17).Parse4DimensionalGrid(c => c == '#');
             var i = 0;
             while (i < 6)
             {
@@ -67,8 +67,7 @@ namespace AdventOfCode2020.Day17
             return newCubes;
         }
 
-        private bool IsActive<T>(T location,
-            Dictionary<T, bool> currentCubeDictionary)
+        private bool IsActive<T>(T location, Dictionary<T, bool> currentCubeDictionary)
         {
             if (currentCubeDictionary.ContainsKey(location))
             {

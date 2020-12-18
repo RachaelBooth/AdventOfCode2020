@@ -1,12 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using AdventOfCode2020.GridHelpers;
 
 namespace AdventOfCode2020
 {
     public class InputReader : InputReader<string>
     {
         public InputReader(int day, bool useTestFilePath = false) : base(day, useTestFilePath) {}
+
+        public Dictionary<(int x, int y), char> Parse2DimensionalGrid()
+        {
+            return Parse2DimensionalGrid(c => c);
+        }
+
+        public Dictionary<(int x, int y), T> Parse2DimensionalGrid<T>(Func<char, T> characterMap)
+        {
+            return ParseGrid(l => l, characterMap);
+        }
+
+        public Dictionary<(int x, int y, int z), T> Parse3DimensionalGrid<T>(Func<char, T> characterMap)
+        {
+            return ParseGrid(l => l.ToThreeDimensions(), characterMap);
+        }
+
+        public Dictionary<(int x, int y, int z, int w), T> Parse4DimensionalGrid<T>(Func<char, T> characterMap)
+        {
+            return ParseGrid(l => l.ToFourDimensions(), characterMap);
+        }
 
         public Dictionary<T, U> ParseGrid<T, U>(Func<(int x, int y), T> locationMap, Func<char, U> characterMap)
         {
