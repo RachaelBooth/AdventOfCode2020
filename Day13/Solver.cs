@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using AdventOfCode.Base;
 
 namespace AdventOfCode2020.Day13
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AdventOfCode.Base;
 
 namespace AdventOfCode2020.Day12
 {

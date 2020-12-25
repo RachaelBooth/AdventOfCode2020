@@ -9,4 +9,8 @@
     <PackageReference Include="EasyConsoleCore" Version="1.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdventOfCodeBase\AdventOfCode.Base.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AdventOfCode2020.GridHelpers;
+using AdventOfCode.Base;
+using AdventOfCode.Base.Vectors;
 
 namespace AdventOfCode2020.Day20
 {

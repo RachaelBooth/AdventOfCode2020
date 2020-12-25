@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using AdventOfCode.Base;
 
 namespace AdventOfCode2020.Day10
 {
